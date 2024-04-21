@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { join } from 'path';
 
 // for connecting to database
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
@@ -10,7 +11,9 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
+    entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
     autoLoadEntities: true,
+    logging: true,
     synchronize: configService.get<boolean>('DB_SYNC'),
 
   }),

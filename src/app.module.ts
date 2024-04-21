@@ -8,6 +8,7 @@ import { typeOrmAsyncConfig } from './database/datasource.config';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
+import { TopicModule } from './topic/topic.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(),
     UserModule,
     CommentModule,
-    DatabaseModule],
+    DatabaseModule,
+    TopicModule],
   controllers: [AppController],
   providers: [AppService],
 })
