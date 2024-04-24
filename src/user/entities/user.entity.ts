@@ -8,10 +8,10 @@ import {
     UpdateDateColumn
 } from "typeorm";
 import * as bcrypt from "bcrypt";
-import { CommentEntity } from "src/comment/entities/comment.entity";
+import { Comment } from "src/comment/entities/comment.entity";
 
 @Entity()
-export class UserEntity {
+export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -24,8 +24,8 @@ export class UserEntity {
     @Column({ nullable: false })
     password: string;
 
-    @OneToMany((type) => CommentEntity, (comment) => comment.user)
-    comments: CommentEntity[];
+    @OneToMany((type) => Comment, (comment) => comment.user)
+    comments: Comment[];
 
     @CreateDateColumn({ select: false })
     createdAt: Date;
