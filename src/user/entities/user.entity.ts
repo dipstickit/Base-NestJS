@@ -16,13 +16,22 @@ export class User {
     id: number;
 
     @Column({ unique: true, nullable: false })
-    name: string;
+    username: string;
 
     @Column({ unique: true, nullable: false })
     email: string;
 
     @Column({ nullable: false })
     password: string;
+    
+    @Column({ nullable: true })
+    address: string;
+
+    @Column({ nullable: true })
+    phone: string;
+
+    @Column({ nullable: true })
+    dob: Date;
 
     @OneToMany((type) => Comment, (comment) => comment.user)
     comments: Comment[];
