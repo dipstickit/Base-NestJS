@@ -14,4 +14,5 @@ export const GET_USER_DETAIL = 'Get user detail successfully';
 export const GET_USERS = 'Get users list successfully';
 export const CREATE_USER = 'Create user successfully';
 export const UPDATE_USER = 'Update user successfully';
+export const DELETE_USER = 'Delete user successfully';
 export const CONFLICT_USERNAME = 'Username already existed';

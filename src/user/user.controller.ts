@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUserDto';
 import { UserService } from './user.service';
 import { CommentService } from './../comment/comment.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ResponseMessage } from 'src/decorator/customize';
-import { CREATE_USER, GET_USER_DETAIL, GET_USERS } from 'src/utils/message';
+import { CREATE_USER, DELETE_USER, GET_USER_DETAIL, GET_USERS, UPDATE_USER } from 'src/utils/message';
 import { UserFilterDto } from './dto/filter-user.dto';
 
 @Controller('user')
@@ -27,13 +27,18 @@ export class UserController {
     findAll(@Query() query: UserFilterDto) {
         return this.userService.findAll(query);
     }
-
-    @Get(':id/comments')
-    getUserComments(@Param('id') id: string) {
-        return this.commentService.findUsersComments(id)
-    }
     @Put(':id')
+    @ResponseMessage(UPDATE_USER)
     updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-        return this.userService.updateUser(id, updateUserDto)
+        return this.userService.updateUser(+id, updateUserDto)
     }
+    @Delete(':id')
+    @ResponseMessage(DELETE_USER)
+    remove(@Param('id') id: number) {
+        return this.userService.deleteUser(+id);
+    }
+    // @Get(':id/comments')
+    // getUserComments(@Param('id') id: string) {
+    //     return this.commentService.findUsersComments(+id);
+    // }
 }
