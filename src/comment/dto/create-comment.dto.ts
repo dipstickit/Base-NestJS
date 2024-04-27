@@ -9,7 +9,7 @@ export class CreateCommentDto {
   @IsNotEmpty()
   @Type(() => Number)
   @IsNumber()
-  postId: number;
+  topicId: number;
 
   @IsNotEmpty()
   @Type(() => Number)

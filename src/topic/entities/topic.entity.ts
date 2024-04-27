@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Comment } from '../../comment/entities/comment.entity';
 
 @Entity()
-export class Topic{
+export class Topic {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,6 +12,6 @@ export class Topic{
   @Column()
   description: string;
 
-  @OneToMany((type) => Comment, (comment) => comment.topic)
+  @OneToMany(() => Comment, comment => comment.topic, { cascade: true })
   comments: Comment[];
 }

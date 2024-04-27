@@ -1,11 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTopicDto } from './dto/create-topic.dto';
 import { UpdateTopicDto } from './dto/update-topic.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Topic } from './entities/topic.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TopicService {
+
+  constructor(
+    @InjectRepository(Topic) private readonly topicRepo: Repository<Topic>,
+  ) { }
+
   create(createTopicDto: CreateTopicDto) {
-    return 'This action adds a new topic';
+    const { title, description } = createTopicDto;
+    const topic = new Topic();
+    topic.title = title;
+    topic.description = description;
+    return this.topicRepo.save(topic);
   }
 
   findAll() {
