@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TopicService } from './topic.service';
 import { CreateTopicDto } from './dto/create-topic.dto';
 import { UpdateTopicDto } from './dto/update-topic.dto';
+import { PostFilterDto } from './dto/filter-post.dto';
 
 @Controller('topic')
 export class TopicController {
@@ -13,8 +14,8 @@ export class TopicController {
   }
 
   @Get()
-  findAll() {
-    return this.topicService.findAll();
+  findAll(@Query() query: PostFilterDto) {
+    return this.topicService.findAll(query);
   }
 
   @Get(':id')

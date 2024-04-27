@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Comment } from '../../comment/entities/comment.entity';
 
 @Entity()
@@ -14,4 +14,13 @@ export class Topic {
 
   @OneToMany(() => Comment, comment => comment.topic, { cascade: true })
   comments: Comment[];
+  
+  @CreateDateColumn({ select: false })
+  createdAt: Date;
+
+  @UpdateDateColumn({ select: false })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ select: false })
+  deletedAt?: Date;
 }
